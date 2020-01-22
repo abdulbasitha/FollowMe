@@ -2,6 +2,8 @@ platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'TUTUCLI' do
+  rn_path = '../node_modules/react-native'
+  rn_maps_path = '../node_modules/react-native-maps'
   # Pods for TUTUCLI
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
@@ -36,9 +38,13 @@ target 'TUTUCLI' do
 
 
   pod 'react-native-maps', :path => '../node_modules/react-native-maps'
-
-  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
-
+  pod 'react-native-maps', path: rn_maps_path
+  pod 'react-native-google-maps', path: rn_maps_path  # Uncomment this line if you want to support GoogleMaps on iOS
+  pod 'GoogleMaps'  # Uncomment this line if you want to support GoogleMaps on iOS
+  pod 'Google-Maps-iOS-Utils' # Uncomment this line if you want to support GoogleMaps on iOS
+  pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
+  pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
+  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
   target 'TUTUCLITests' do
     inherit! :search_paths
     # Pods for testing
@@ -54,5 +60,18 @@ target 'TUTUCLI-tvOS' do
     inherit! :search_paths
     # Pods for testing
   end
-
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
+      if target.name == "React"
+        target.remove_from_project
+      end
+    end
+  end
+ 

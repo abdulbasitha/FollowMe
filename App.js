@@ -10,7 +10,8 @@ import {
   Text,
   StyleSheet,
   Button,
-  Alert
+  Alert,
+  SafeAreaView
 } from "react-native";
 import FetchLocation from './components/FetchLocation';
 import Maps from './components/UsersMaps';
@@ -50,7 +51,12 @@ state = {
      console.log(err);
    });
   }
+  Call=()=>{
+    this.timer = setInterval(()=> this.Tracking(), 1000)
+   }
   Tracking = ()=>{
+   
+    
     fetch('https://react-native-cli.firebaseio.com/places.json')
     .then(res => res.json())
     .then(parsedResult => {
@@ -82,9 +88,8 @@ state = {
   }
   render() {
     return (
-      <View style={styles.container}>
-       
-        <FetchLocation onGetLOcation={this.getUserLocation}/> 
+      <SafeAreaView style={styles.container}>
+      <FetchLocation onGetLOcation={this.getUserLocation}/> 
         <View style={styles.map}>
           <Maps  Location={this.state.userLacation}
           userPlace={this.state.userPlace}
@@ -102,8 +107,8 @@ state = {
 
         </View>
         </View>
-        <Button color="green" title="Track" onPress={this.Tracking}/>
-      </View>
+        <Button color="green" title="Track" onPress={this.Call}/>
+      </SafeAreaView>
 
        
     );
