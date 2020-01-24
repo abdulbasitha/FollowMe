@@ -13,6 +13,7 @@ import {
 import 'react-native-gesture-handler';
 import Login from './Login';
 import Splash from './Splash';
+import MapF from "./App";
 
 class SplashtoLogin extends Component {
     constructor(props){
@@ -34,7 +35,9 @@ class SplashtoLogin extends Component {
         if (!this.state.timePassed) {
             return <Splash />;
         } else {
-            return <Login />;
+            return (
+            <Login />
+            )
         }
     }
 }

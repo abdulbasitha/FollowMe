@@ -5,27 +5,75 @@
 import React, { Component } from "react";
 
 import Geolocation from '@react-native-community/geolocation';
-import { 
+import {
   View,
   Text,
   StyleSheet,
   Button,
   Alert,
-  SafeAreaView
+  SafeAreaView, AppState
 } from "react-native";
-import FetchLocation from './components/FetchLocation';
-import Maps from './components/UsersMaps';
- import ViewLocation from './components/ViewLocation';
-export default class componentName extends Component {
+  import FetchLocation from './components/FetchLocation';
+  import Maps from './components/UsersMaps';
+  import ViewLocation from './components/ViewLocation';
+
+ export default class Map extends Component {
 state = {
-  
+  appState: AppState.currentState,
   userLacation: null,
   viewLocation:null,
   userPlaces : []
 }
 
-  getUserLocation= ()=>{
-  
+   componentDidMount() {
+     AppState.addEventListener('change', this._handleAppStateChange);
+   }
+
+
+   componentWillUnmount() {
+     AppState.removeEventListener('change', this._handleAppStateChange);
+   }
+
+   _handleAppStateChange = (nextAppState) => {
+
+     this.setState({ appState: nextAppState });
+
+     if (nextAppState === 'background') {
+
+       // Do something here on app background.
+       console.log("App is in Background Mode.")
+       this.getUserLocation();
+
+
+     }
+
+     if (nextAppState === 'active') {
+
+       // Do something here on app active foreground mode.
+       console.log("App is in Active Foreground Mode.")
+       this.getUserLocation();
+     }
+
+     if (nextAppState === 'inactive') {
+
+       // Do something here on app inactive mode.
+       console.log("App is in inactive Mode.")
+     }
+   };
+
+
+
+
+
+
+
+
+
+
+
+
+getUserLocation= ()=>{
+
     Geolocation.watchPosition(position =>{
       console.log(position);
     this.setState({
@@ -45,7 +93,7 @@ state = {
     })
     .then(res => console.log(res))
     .catch(err=> console.log(err));
-     
+
    },
    err=>{
      console.log(err);
@@ -55,8 +103,8 @@ state = {
     this.timer = setInterval(()=> this.Tracking(), 1000)
    }
   Tracking = ()=>{
-   
-    
+
+
     fetch('https://react-native-cli.firebaseio.com/places.json')
     .then(res => res.json())
     .then(parsedResult => {
@@ -89,7 +137,7 @@ state = {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-      <FetchLocation onGetLOcation={this.getUserLocation}/> 
+      <FetchLocation onGetLOcation={this.getUserLocation}/>
         <View style={styles.map}>
           <Maps  Location={this.state.userLacation}
           userPlace={this.state.userPlace}
@@ -98,19 +146,19 @@ state = {
         </View>
 
         <View style={styles.mapfetch}>
-      
-       
-       
+
+
+
 
         <View style={styles.map}>
-          <ViewLocation Location={this.state.viewLocation}/> 
+          <ViewLocation Location={this.state.viewLocation}/>
 
         </View>
         </View>
         <Button color="green" title="Track" onPress={this.Call}/>
       </SafeAreaView>
 
-       
+
     );
   }
 }
@@ -126,6 +174,7 @@ flex:1,
   mapfetch:{
     flex:1,
     paddingTop:10
-   
+
   }
 });
+

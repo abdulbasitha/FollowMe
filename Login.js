@@ -3,7 +3,8 @@
 /* github    : abdulbasitha */
 /* More Info : https://techzia.in */
 import React, {Component} from "react";
-import 'react-native-gesture-handler';
+import {createAppContainer, ScrollView} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import {
     View,
@@ -11,37 +12,36 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Button,
     SafeAreaView,
-    Alert,
-    Model,
-
+    AppState
 } from "react-native";
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import Map from './App';
-class Login extends Component {
+import MapF from './App';
+import Geolocation from "@react-native-community/geolocation";
+ class Login extends Component {
 
 
-    state = {
-        name: null,
-        emai: null,
-        pass: null,
-        busno: null
-    }
+
+
+    //  state = {
+    //     name: null,
+    //     emai: null,
+    //     pass: null,
+    //     busno: null
+    // }
     Test = () => {
         // if (this.state.name == null || this.state.email == null || this.state.pass == null || this.state.busno == null)
         //     return;
         // else
-            this.props.navigation.navigate('Map');
+
 
 
     }
 
     render() {
+
         return (
 
-            <View style={styles.container} >
+            <ScrollView style={styles.container} >
 
                 <View style={styles.head} >
                     <Text style={styles.signupText}>Signup</Text>
@@ -65,7 +65,7 @@ class Login extends Component {
                         </View>
 
                         <View style={styles.submit}>
-                            <TouchableOpacity style={styles.button} onPress={() => this.Test}>
+                            <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Track')} >
                                 <Text> Signup</Text>
                             </TouchableOpacity>
                         </View>
@@ -73,7 +73,7 @@ class Login extends Component {
 
                 </View>
 
-            </View>
+            </ScrollView>
 
 
         );
@@ -81,13 +81,7 @@ class Login extends Component {
 }
 
 
-const AppNavigator = createStackNavigator({
-   Home:Login,
-    Map :Map
 
-
-
-    });
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -127,9 +121,20 @@ const styles = StyleSheet.create({
 
     },
     TextInput:{
-      margin:"4%"
+        margin:"4%"
     },
     cardview: {}
 
 });
+
+const AppNavigator = createStackNavigator({
+    Home:{
+    screen: Login },
+    Track:{
+        screen: MapF},
+
+
+
+});
 export default createAppContainer(AppNavigator);
+

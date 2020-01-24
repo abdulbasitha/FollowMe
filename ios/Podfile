@@ -47,9 +47,9 @@ target 'TUTUCLI' do
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
-  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'TUTUCLITests' do
     inherit! :search_paths
