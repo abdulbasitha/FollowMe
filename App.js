@@ -42,7 +42,7 @@ state = {
 
        // Do something here on app background.
        console.log("App is in Background Mode.")
-       this.getUserLocation();
+      // this.getUserLocation();
 
 
      }
@@ -72,35 +72,36 @@ state = {
 
 
 
-getUserLocation= ()=>{
-
-    Geolocation.watchPosition(position =>{
-      console.log(position);
-    this.setState({
-      userLacation:{
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }
-    });
-    fetch('https://react-native-cli.firebaseio.com/places.json',{
-      method:'POST',
-      body:JSON.stringify({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      })
-    })
-    .then(res => console.log(res))
-    .catch(err=> console.log(err));
-
-   },
-   err=>{
-     console.log(err);
-   });
-  }
+// getUserLocation= ()=>{
+//
+//     Geolocation.watchPosition(position =>{
+//       console.log(position);
+//     this.setState({
+//       userLacation:{
+//         latitude: position.coords.latitude,
+//         longitude: position.coords.longitude,
+//         latitudeDelta: 0.0922,
+//         longitudeDelta: 0.0421,
+//       }
+//     });
+//     fetch('https://react-native-cli.firebaseio.com/places.json',{
+//       method:'POST',
+//       body:JSON.stringify({
+//         latitude: position.coords.latitude,
+//         longitude: position.coords.longitude,
+//       })
+//     })
+//     .then(res => console.log(res))
+//     .catch(err=> console.log(err));
+//
+//    },
+//    err=>{
+//      console.log(err);
+//    });
+//   }
   Call=()=>{
-    this.timer = setInterval(()=> this.Tracking(), 1000)
+    // this.timer = setInterval(()=> this.Tracking(), 1000)
+    this.Tracking();
    }
   Tracking = ()=>{
 
@@ -108,15 +109,20 @@ getUserLocation= ()=>{
     fetch('https://react-native-cli.firebaseio.com/places.json')
     .then(res => res.json())
     .then(parsedResult => {
+    //  console.log(parsedResult);
       const placesArray= [];
-      for (const key in parsedResult){
+      for(const key in parsedResult){
+        // console.log(parsedResult[]);
+
         placesArray.push({
-          latitude:parsedResult[key].latitude,
-          longitude:parsedResult[key].longitude,
-          id:key
+
+          latitude:parsedResult[key][0].latitude,
+          longitude:parsedResult[key][0].longitude,
+
         })
-       console.log(placesArray);
+
       }
+     //console.log(placesArray);
       this.setState({
         viewLocation:{
 

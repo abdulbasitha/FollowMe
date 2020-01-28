@@ -5,7 +5,7 @@
 import React, {Component} from "react";
 import {createAppContainer, ScrollView} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
+import firebase from "./config/firebase";
 import {
     View,
     Text,
@@ -13,43 +13,31 @@ import {
     TextInput,
     TouchableOpacity,
     SafeAreaView,
-    AppState,
-    Alert
+    AppState
 } from "react-native";
-//import MapF from './App';
-//import Geolocation from "@react-native-community/geolocation";
-import firebase from "./config/firebase";
- class Login extends Component {
-
+import MapF from './App';
+import Geolocation from "@react-native-community/geolocation";
+ class Signup extends Component {
      state = {
-
-        email: null,
+         email: null,
         pass: null,
-         error:null,
-         loading:false
+         err:''
 
- //{()=>this.props.navigation.navigate('Track')}
     }
-    Loggin = () =>{
-         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.pass)
-             .then(this.Logginsucess)
-             .catch((err)=>{console.log(err)})
+    register = ()=>{
+         firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.pass).then(console.log("ok"))
+             .catch(err=>{
+                 this.state.err=err
+             })
     }
-     Logginsucess =()=>{
-         this.setState({
-             error:'',
-             loading:false
-         })
-         console.log("Login Success")
-     }
 
-     render() {
+    render() {
 
         return (
             <ScrollView style={styles.container} >
 
                 <View style={styles.head} >
-                    <Text style={styles.signupText}>Login</Text>
+                    <Text style={styles.signupText}>Signup</Text>
                 </View>
 
                 <View style={styles.registersection}>
@@ -66,8 +54,8 @@ import firebase from "./config/firebase";
                         </View>
 
                         <View style={styles.submit}>
-                            <TouchableOpacity style={styles.button} onPress={this.Loggin} >
-                                <Text> Login</Text>
+                            <TouchableOpacity style={styles.button} onPress={this.register} >
+                                <Text> Signup</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -91,16 +79,15 @@ const styles = StyleSheet.create({
     head: {
 
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop:20
+        justifyContent: 'center'
+
     },
     signupText: {
         fontSize: 20,
         fontWeight: "bold",
-        paddingBottom:20
+
     },
     registersection: {
-
         flex: 1,
         paddingHorizontal: 20,
 
@@ -135,9 +122,10 @@ const styles = StyleSheet.create({
 });
 
 const AppNavigator = createStackNavigator({
-    Login:{
-    screen: Login },
-
+    SIgnup:{
+    screen: Signup },
+    Track:{
+        screen: MapF},
 
 
 

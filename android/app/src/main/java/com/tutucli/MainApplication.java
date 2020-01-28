@@ -20,7 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
-
+import com.marianhello.bgloc.react.BackgroundGeolocationPackage;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -40,7 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ReanimatedPackage(),
             new GeolocationPackage(),
                       new MapsPackage(),
-              new SafeAreaContextPackage()
+              new SafeAreaContextPackage(),
+              new BackgroundGeolocationPackage()
               );
           }
 
