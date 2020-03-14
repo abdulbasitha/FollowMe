@@ -29,6 +29,7 @@ class SplashtoLogin extends Component {
         logginIn:null
     }
     componentDidMount() {
+        
         setTimeout( () => {
             this.setTimePassed();
         },1000);
