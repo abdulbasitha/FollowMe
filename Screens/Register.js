@@ -16,7 +16,8 @@ import {
     KeyboardAvoidingView,
     Dimensions,
     Alert,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    AsyncStorage
    
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -30,16 +31,16 @@ class Login extends Component {
        email:"",
        password:"",
        opcode:"",
-       active:"administrator",
+       active:"user",
    }
    handleType = id =>{
     const {active} = this.state;
     this.setState({
         active: active === id ? null:id,
     })
-    console.log(this.state.operator)
+    
 }
-   
+ 
 
 Register = () => {
       
@@ -47,6 +48,12 @@ Register = () => {
                 Alert.alert("All fields are required")
                 return;
                 }
+                else if(this.state.active=="oprator")
+                    {
+                        if(this.state.opcode!=123)
+                        Alert.alert("invalid operator code!!")
+                        return;
+                    }
             try{
                 firebase
                 .auth()
@@ -77,7 +84,7 @@ Register = () => {
                 console.log(error.toString(error));
               }
         
-
+        // this.store("usertype",this.state.active)
        // this.props.navigation.navigate('Track')
    }
     render() {
@@ -130,15 +137,15 @@ Register = () => {
 
         <Block row space="between" style={{ marginHorizontal: 28, marginTop: 40 ,marginBottom:28}}>
 
-            <TouchableWithoutFeedback onPress={() => this.handleType('administrator')}>
+            <TouchableWithoutFeedback onPress={() => this.handleType('user')}>
                 <Block
                     center
                     middle
 
-                    style={[{ marginRight:10 }, styles.card, active === 'administrator' ? styles.active : null]}
+                    style={[{ marginRight:10 }, styles.card, active === 'user' ? styles.active : null]}
 
                 >
-                     {active === 'administrator' ?
+                     {active === 'user' ?
                     ( <Block center middle style={styles.check}>
                         {checked}
                         </Block>) :null
