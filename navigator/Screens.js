@@ -9,6 +9,9 @@ import Logout from '../Screens/Logout';
 import Reg from '../Screens/Extra-Ui/Registration';
 const ScreenContainer =  createDrawerNavigator ({
     Home:{screen:Track},
+    Track:{screen:Map,navigationOptions: {
+        drawerLabel: () => null
+    }},
     Logout:{screen:Logout},
     
 //  Reg,

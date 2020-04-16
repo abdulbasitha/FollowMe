@@ -8,7 +8,8 @@ import {
     Image,
     StyleSheet,
     Linking,
-    StatusBar
+    StatusBar,
+    Alert
 } from "react-native";
 import Block from '../components/Block';
 import Text from '../components/Text';
@@ -57,7 +58,7 @@ class Track extends Component {
                     >Track Your Bus With Zia Tracker.</Text>
                     <Block center style={{marginTop:40}}>
                     <Input label={"Bus Number"}  style={{  marginBottom:15}} full number/>
-                    <Button   style={{marginBottom:12}} onPress={()=>navigation.navigate('Map')}> 
+                    <Button   style={{marginBottom:12}} onPress={()=>this.props.navigation.navigate("Track")}> 
                     <Text button >Track</Text>
                     
                 </Button>

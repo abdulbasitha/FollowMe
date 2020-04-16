@@ -30,17 +30,19 @@ class SplashtoLogin extends Component {
 
     constructor(props){
         super(props);
+        this.checkLoginStatus();
         this.state = {
             timePassed: false,
             logginIn:false,
         };
+        
     }
     state={
         
         isLoadingComplete: false
     }
     componentDidMount() {
-       this.checkLoginStatus();
+       
         setTimeout( () => { 
             
             this.setTimePassed();
