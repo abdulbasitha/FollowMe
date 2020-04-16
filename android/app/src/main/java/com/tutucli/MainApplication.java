@@ -2,6 +2,7 @@ package com.tutucli;
 
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.reactnativecommunity.geolocation.GeolocationPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
           protected List<ReactPackage> getPackages() {
               return Arrays.<ReactPackage>asList(
                       new MainReactPackage(),
+            new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
             new ReanimatedPackage(),
             new GeolocationPackage(),

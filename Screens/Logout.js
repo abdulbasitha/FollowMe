@@ -3,27 +3,29 @@
 /* github    : abdulbasitha */
 /* More Info : https://techzia.in */
 import React, { Component } from "react";
-import firebase, { auth } from "firebase";
-import config from '../config/firebase';
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    AsyncStorage
 } from "react-native";
+import firebase, { auth } from "firebase";
+import Navigator from '../navigator/AppNavigator';
 class Logout extends Component {
     constructor(){
-        super()
-       this.signout();
+        super();
         
     }
-
-    signout = ()=>{
-       // firebase.auth().signOut();
-       this.props.navigation.navigate("Track")
-    }
+   componentDidMount(){
+       firebase.auth().signOut();
+   }
+    
     render() {
-        
-        return null;
+        return (
+           
+                <Navigator />
+            
+        );
     }
 }
 export default Logout;

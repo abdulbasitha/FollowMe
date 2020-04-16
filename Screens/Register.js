@@ -41,20 +41,28 @@ class Login extends Component {
     
 }
  
-
+storeData = async (key,data) => {
+    try {
+      await AsyncStorage.setItem('@storage_Key', 'stored value')
+    } catch (e) {
+      
+    }
+  }
 Register = () => {
       
        if(this.state.name == "" || this.state.email == "" || this.state.password == "" ||this.state.active == null){
                 Alert.alert("All fields are required")
                 return;
                 }
-                else if(this.state.active=="oprator")
-                    {
-                        if(this.state.opcode!=123)
+        if(this.state.active=="oprator")
+            {
+                        if(this.state.opcode!=123){
                         Alert.alert("invalid operator code!!")
                         return;
-                    }
+                        }
+            }
             try{
+               
                 firebase
                 .auth()
                 .createUserWithEmailAndPassword
@@ -64,7 +72,9 @@ Register = () => {
                     
                     
                   Alert.alert("ok")
-
+                  this.storeData("userType",this.state.opcode == "" ?  "user" : "operator" )
+                  this.storeData("userName",this.state.name )
+                  this.storeData("userEmail",this.state.email )
                 }).catch((error) => Alert.alert(error.toString(error)));
 
                 firebase.auth().onAuthStateChanged((user)=>{
@@ -74,7 +84,7 @@ Register = () => {
                         name:this.state.name,
                         type:this.state.opcode == "" ?  "user" : "operator" 
                     }).then(()=>{
-                        // this.props.navigation.navigate('Login')
+                   
                     })
                 })
             }

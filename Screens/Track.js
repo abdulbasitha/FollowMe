@@ -9,8 +9,10 @@ import {
     StyleSheet,
     Linking,
     StatusBar,
-    Alert
+    Alert,
+    AsyncStorage
 } from "react-native";
+
 import Block from '../components/Block';
 import Text from '../components/Text';
 import Input from '../components/Input';
@@ -21,7 +23,21 @@ import firebase, { auth } from "firebase";
 import config from '../config/firebase';
 import * as theme from '../contants/theme';
 class Track extends Component {
-   
+    constructor(){
+        super()
+        this.getData("userType")
+    }
+
+    getData = async (key) => {
+        try {
+          const value = await AsyncStorage.getItem(key)
+          
+           console.log(value)
+          
+        } catch(e) {
+          // error reading value
+        }
+      }
     render() {
         const {navigation} = this.props;
         const toggleDrawer = () => {
