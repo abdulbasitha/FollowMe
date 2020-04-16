@@ -3,14 +3,26 @@
 /* github    : abdulbasitha */
 /* More Info : https://techzia.in */
 import React, { Component } from "react";
+import firebase, { auth } from "firebase";
+import config from '../config/firebase';
 import { 
     View,
     Text,
     StyleSheet
 } from "react-native";
-
 class Logout extends Component {
+    constructor(){
+        super()
+       this.signout();
+        
+    }
+
+    signout = ()=>{
+       // firebase.auth().signOut();
+       this.props.navigation.navigate("Track")
+    }
     render() {
+        
         return null;
     }
 }
