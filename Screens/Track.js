@@ -29,7 +29,7 @@ class Track extends Component {
         return (
             <Block center middle style={{backgroundColor:'white'}}>
                  <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <Head Option={toggleDrawer}/>
+                <Head  name ="Track" Option={toggleDrawer}/>
              
                  <Block middle>
                     <Image source={require('../assets/Src/img/logo.png')}

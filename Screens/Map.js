@@ -94,20 +94,28 @@ class MapLocation extends Component {
 
       
     render() {
+        
+        const {navigation} = this.props;
         const toggleDrawer = () => {
             navigation.openDrawer();
           }
         return (
-        <SafeAreaView style={styles.container}>
-              <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <Head Option={toggleDrawer}/>
-        <Block style={styles.map}>
+        <Block style={styles.container}>
+            <Head name="Current Location" Option={toggleDrawer}/>
+        <Block style={styles.map} >
           <ViewLocation Location={this.state.viewLocation}/>
-
         </Block>
 
-        <Button color="green" title="Track" onPress={this.Call}/>
-      </SafeAreaView>
+        {/* <Button color="green" title="Track" onPress={this.Call}/> */}
+     
+        <Block flex={.2} center middle>
+        <Button   style={{marginBottom:12}} onPress={this.Call}> 
+                    <Text button >Locate</Text>
+                    
+                </Button>
+        </Block>
+
+      </Block>
         );
     }
 }
