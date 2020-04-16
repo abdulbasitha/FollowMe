@@ -14,6 +14,8 @@ const colors = {
   gray2: '#F4F6FC',
   gray3: '#EEF3F5',
   caption: '#B0BAC9',
+  status_bar: '#1c41fc',
+  caption: '#B0BAC9',
   input: 'rgba(224, 231, 255, 0.20)', // '#E0E7FF' 20%
   border: '#D6DDF6',
   card: 'rgba(46,91,255,0.08)',

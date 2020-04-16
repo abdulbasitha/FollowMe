@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import Geolocation from '@react-native-community/geolocation';
 import Block from '../components/Block';
 import Text from '../components/Text';
+import * as theme from '../contants/theme';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import firebase, { auth } from "firebase";
@@ -101,6 +102,7 @@ class MapLocation extends Component {
           }
         return (
         <Block style={styles.container}>
+            <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
             <Head name="Current Location" Option={toggleDrawer}/>
         <Block style={styles.map} >
           <ViewLocation Location={this.state.viewLocation}/>

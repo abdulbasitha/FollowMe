@@ -19,6 +19,7 @@ import Head from '../components/header';
 import * as Operation from '../contants/operation';
 import firebase, { auth } from "firebase";
 import config from '../config/firebase';
+import * as theme from '../contants/theme';
 class Track extends Component {
    
     render() {
@@ -28,7 +29,7 @@ class Track extends Component {
           }
         return (
             <Block center middle style={{backgroundColor:'white'}}>
-                 <StatusBar backgroundColor="white" barStyle="dark-content" />
+              <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
                 <Head  name ="Track" Option={toggleDrawer}/>
              
                  <Block middle>
