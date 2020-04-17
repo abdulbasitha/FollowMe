@@ -10,6 +10,7 @@ import {
     Alert,
     Model,
     StatusBar,
+    AsyncStorage
     
 } from "react-native";
 import 'react-native-gesture-handler';
@@ -30,9 +31,10 @@ class SplashtoLogin extends Component {
 
 
     constructor(props){
+        
         super(props);
         this.checkLoginStatus();
-        this
+        this.getData("userType")
         this.state = {
             timePassed: false,
             logginIn:false,
@@ -45,20 +47,25 @@ class SplashtoLogin extends Component {
         isLoadingComplete: false
     }
     componentDidMount() {
-       
+      
         setTimeout( () => { 
-            
+           
             this.setTimePassed();
         },1000);
     }
     setTimePassed() {
-        this.setState({timePassed: true});
+        if(this.state.isLoadingComplete == true)
+            this.setState({timePassed: true});
+        else
+            this.checkLoginStatus();
+
         
     }
     checkLoginStatus  = () =>{
         firebase.auth().onAuthStateChanged(user => {
             if(user)
                this.setState({logginIn:true})
+               this.setState({isLoadingComplete:true})
             })
     }
     async getData(key) {
@@ -68,12 +75,13 @@ class SplashtoLogin extends Component {
           this.setState({
               type:data
           })
-          
+          console.log("check",data)
         } catch (error) {
           console.log("Something went wrong", error);
         }
       }
     render() {
+    
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         if (!this.state.timePassed) {
             
