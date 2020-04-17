@@ -28,14 +28,14 @@ class Track extends Component {
         this.getData("userType")
     }
 
-    getData = async (key) => {
+    async getData(key) {
         try {
-          const value = await AsyncStorage.getItem(key)
+          let userData = await AsyncStorage.getItem(key);
+          let data = JSON.parse(userData);
+          console.log(data)
           
-           console.log(value)
-          
-        } catch(e) {
-          // error reading value
+        } catch (error) {
+          console.log("Something went wrong", error);
         }
       }
     render() {

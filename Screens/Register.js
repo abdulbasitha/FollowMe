@@ -41,13 +41,16 @@ class Login extends Component {
     
 }
  
-storeData = async (key,data) => {
+async storeData(key,user) {
     try {
-      await AsyncStorage.setItem('@storage_Key', 'stored value')
-    } catch (e) {
-      
+
+       await AsyncStorage.setItem(key, JSON.stringify(user));
+       console.log(JSON.stringify(user))
+       } catch (error) {
+      console.log("Something went wrong", error);
     }
   }
+
 Register = () => {
       
        if(this.state.name == "" || this.state.email == "" || this.state.password == "" ||this.state.active == null){
