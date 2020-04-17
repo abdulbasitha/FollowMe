@@ -87,8 +87,9 @@ class SplashtoLogin extends Component {
             return <CoreDriver />
 
             }
-            else
+            else{
             return <Navigator />
+            }
             
         }
     }
