@@ -23,11 +23,25 @@ import firebase, { auth } from "firebase";
 import config from '../config/firebase';
 import * as theme from '../contants/theme';
 class Track extends Component {
+
+//     componentDidMount(){
+            
+            
+//         this.willFocusSubscription = this.props.navigation.addListener(
+//             'willFocus',
+//             () => {
+//                 this.setState({
+//                     busno:null
+//                 })
+                
+            
+//     }
+//     );
+    
+// }
     constructor(){
         super()
-        this.setState({
-            busno:null
-        })
+       
         this.getData("userType")
     }
     state = {
@@ -37,7 +51,9 @@ Track = ()=>{
    if(this.state.busno == null){
         Alert.alert("Enter a valid Bus no")
    }else{
-       this.props.navigation.navigate("Track")
+       this.props.navigation.navigate("Track",{
+        Busno:this.state.busno
+      })
    }
         
 }
@@ -87,7 +103,7 @@ Track = ()=>{
                     // weight={'normal'} 
                     >Navigate Your Bus With Zia Driver.</Text>
                     <Block center style={{marginTop:40}}>
-                    <Input  onChangeText={(busno)=>this.setState({busno})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
+                    <Input value={this.state.busno} onChangeText={(no)=>this.setState({busno:no})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
                     <Button   style={{marginBottom:12}} onPress={this.Track}> 
                     <Text button >Start</Text>
                     

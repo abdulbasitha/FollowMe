@@ -63,7 +63,7 @@ class MapLocation extends Component {
       Tracking = ()=>{
     
     
-        fetch('https://react-native-cli.firebaseio.com/places.json')
+        fetch("https://react-native-cli.firebaseio.com/places"+this.props.navigation.getParam('Busno')+".json")
         .then(res => res.json())
         .then(parsedResult => {
           const placesArray= [];

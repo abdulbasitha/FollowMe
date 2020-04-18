@@ -8,7 +8,7 @@ import {
 
 const FetchLocation = (props) => {
     return(
-     <Button title="Get Location" onPress={props.onGetLOcation}/>
+     <Button title="Start" onPress={props.onGetLOcation}/>
     );
 }
 export default FetchLocation;

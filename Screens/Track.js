@@ -27,7 +27,19 @@ class Track extends Component {
         super()
         this.getData("userType")
     }
-
+    state = {
+        busno:null
+    }
+    Track = ()=>{
+        if(this.state.busno == null){
+             Alert.alert("Enter a valid Bus no")
+        }else{
+            this.props.navigation.navigate("Track",{
+             Busno:this.state.busno
+           })
+        }
+             
+     }
     async getData(key) {
         try {
           let userData = await AsyncStorage.getItem(key);
@@ -74,8 +86,8 @@ class Track extends Component {
                     // weight={'normal'} 
                     >Track Your Bus With Zia Tracker.</Text>
                     <Block center style={{marginTop:40}}>
-                    <Input label={"Bus Number"}  style={{  marginBottom:15}} full number/>
-                    <Button   style={{marginBottom:12}} onPress={()=>this.props.navigation.navigate("Track")}> 
+                    <Input value={this.state.busno} onChangeText={(no)=>this.setState({busno:no})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
+                    <Button   style={{marginBottom:12}} onPress={this.Track}> 
                     <Text button >Track</Text>
                     
                 </Button>

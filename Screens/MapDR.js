@@ -19,30 +19,50 @@ import {
     View,
     StyleSheet,
     AppState,
-    SafeAreaView,StatusBar
+    SafeAreaView,StatusBar, Alert,Dimensions
 } from "react-native";
-
+const width = Dimensions.get("window").width
+const height = Dimensions.get("window").height
 class MapLocation extends Component {
+
+      componentDidMount(){
+            
+            
+        this.willFocusSubscription = this.props.navigation.addListener(
+            'willFocus',
+            () => {
+                this.setState({
+                  appState: AppState.currentState,
+                  userLocation: null,
+                  viewLocation:null,
+                  userPlaces : []
+                })
+                
+            
+    }
+    );
+    
+}
     state = {
         appState: AppState.currentState,
-        userLacation: null,
+        userLocation: null,
         viewLocation:null,
         userPlaces : []
       }
 
       getUserLocation= ()=>{
-
+      //  Alert.alert(this.props.navigation.getParam('Busno'))
         Geolocation.watchPosition(position =>{
           console.log(position);
         this.setState({
-          userLacation:{
+          userLocation:{
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }
         });
-        fetch('https://react-native-cli.firebaseio.com/places.json',{
+        fetch("https://react-native-cli.firebaseio.com/places"+this.props.navigation.getParam('Busno')+".json",{
           method:'POST',
           body:JSON.stringify({
             latitude: position.coords.latitude,
@@ -72,7 +92,7 @@ class MapLocation extends Component {
             <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
             <Head name="Bus Location" Option={toggleDrawer}/>
         <Block style={styles.map} >
-        <Maps  Location={this.state.userLacation}
+        <Maps  Location={this.state.userLocation}
           userPlace={this.state.userPlace}
           />
            
@@ -80,10 +100,10 @@ class MapLocation extends Component {
 
         {/* <Button color="green" title="Track" onPress={this.Call}/> */}
      
-        <Block flex={.2} center middle>
-        <FetchLocation onGetLOcation={this.getUserLocation}/>
+        <Block flex={.2} center middle style={styles.cardbottom}>
+            <FetchLocation onGetLOcation={this.getUserLocation}/>
         </Block>
-
+       
       </Block>
         );
     }
@@ -102,6 +122,18 @@ const styles = StyleSheet.create({
       flex:1,
       paddingTop:10
   
+    },
+    cardbottom:{
+      backgroundColor:"white",
+      width:width,
+      height:height/6,
+      position:"absolute",
+      bottom:0,
+      borderTopLeftRadius:30,
+      borderTopRightRadius:30,
+
+     
+      
     }
   });
   

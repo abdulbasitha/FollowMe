@@ -25,16 +25,12 @@ import config from './config/firebase';
 
 
 class SplashtoLogin extends Component {
-
-   
-    
-
-
-    constructor(props){
+  
+   constructor(props){
         
         super(props);
+        
         this.checkLoginStatus();
-        this.getData("userType")
         this.state = {
             timePassed: false,
             logginIn:false,
@@ -56,8 +52,7 @@ class SplashtoLogin extends Component {
     setTimePassed() {
         if(this.state.isLoadingComplete == true)
             this.setState({timePassed: true});
-        else
-            this.checkLoginStatus();
+      
 
         
     }
@@ -66,7 +61,10 @@ class SplashtoLogin extends Component {
             if(user)
                this.setState({logginIn:true})
                this.setState({isLoadingComplete:true})
+               this.getData("userType")
+               this.setState({timePassed:true})
             })
+           
     }
     async getData(key) {
         try {
