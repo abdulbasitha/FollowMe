@@ -44,7 +44,7 @@ class Track extends Component {
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
-                     Zia Tracker</Text>
+                     FollowMe</Text>
                     
                     <Text 
                     paragraph
@@ -54,7 +54,7 @@ class Track extends Component {
                     // spacing={0} 
                     // height={22} 
                     // weight={'normal'} 
-                    >Track Your Bus With Zia Tracker.</Text>
+                    >Track Your Bus With FollowMe.</Text>
                     <Block center style={{marginTop:40}}>
                     <Input label={"Bus Number"}  style={{  marginBottom:15}} full number/>
                     <Button   style={{marginBottom:12}} onPress={()=>navigation.navigate('Map')}> 

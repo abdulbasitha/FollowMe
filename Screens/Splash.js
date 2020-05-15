@@ -28,7 +28,7 @@ class Splash extends Component {
                 </View>
                 <View>
                 <View style={styles.tag}>
-                    <Text>BY TECHZIA </Text>
+                    {/* <Text>BY TECHZIA </Text> */}
                 </View>
                 </View>
             </SafeAreaView>

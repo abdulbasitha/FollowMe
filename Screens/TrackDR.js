@@ -51,7 +51,7 @@ Track = ()=>{
    if(this.state.busno == null){
         Alert.alert("Enter a valid Bus no")
    }else{
-       this.props.navigation.navigate("Track",{
+       this.props.navigation.navigate("TrackDR",{
         Busno:this.state.busno
       })
    }
@@ -75,7 +75,7 @@ Track = ()=>{
         return (
             <Block center middle style={{backgroundColor:'white'}}>
               <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
-                <Head  name ="Zia Driver" Option={toggleDrawer}/>
+                <Head  name ="FolowMe Driver" Option={toggleDrawer}/>
              
                  <Block middle>
                     <Image source={require('../assets/Src/img/logo.png')}
@@ -91,7 +91,7 @@ Track = ()=>{
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
-                      Zia Driver</Text>
+                      FollowMe Driver</Text>
                     
                     <Text 
                     paragraph

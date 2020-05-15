@@ -74,7 +74,7 @@ class Track extends Component {
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
-                     Zia Tracker</Text>
+                     FollowMe</Text>
                     
                     <Text 
                     paragraph
@@ -84,7 +84,7 @@ class Track extends Component {
                     // spacing={0} 
                     // height={22} 
                     // weight={'normal'} 
-                    >Track Your Bus With Zia Tracker.</Text>
+                    >Track Your Bus With FollowMe.</Text>
                     <Block center style={{marginTop:40}}>
                     <Input value={this.state.busno} onChangeText={(no)=>this.setState({busno:no})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
                     <Button   style={{marginBottom:12}} onPress={this.Track}> 

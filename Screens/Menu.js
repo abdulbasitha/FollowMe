@@ -38,7 +38,7 @@ class Menu extends Component {
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
-                    Continue With Zia Tracker</Text>
+                    Continue With FollowMe</Text>
                     
                     <Text 
                     paragraph

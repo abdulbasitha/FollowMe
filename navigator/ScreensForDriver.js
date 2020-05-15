@@ -8,8 +8,8 @@ import MapDR from '../Screens/MapDR';
 import Logout from '../Screens/Logout';
 import Reg from '../Screens/Extra-Ui/Registration';
 const ScreenContainer =  createDrawerNavigator ({
-    Home:{screen:TrackDR},
-    Track:{screen:MapDR,navigationOptions: {
+    HomeDR:{screen:TrackDR},
+    TrackDR:{screen:MapDR,navigationOptions: {
         drawerLabel: () => null
     }},
     Logout:{screen:Logout},

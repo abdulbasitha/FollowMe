@@ -75,7 +75,7 @@ class Login extends Component {
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
-                    Sign in to Zia Tracker</Text>
+                    Sign in to FollowMe</Text>
                     
                     <Text 
                     paragraph

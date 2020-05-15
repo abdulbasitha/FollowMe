@@ -8,6 +8,9 @@ import Text from '../components/Text';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import * as theme from '../contants/theme';
+import Core from '../navigator/Screens';
+import CoreDriver from '../navigator/ScreensForDriver';
+
 import firebase, { auth } from "firebase";
 import config from '../config/firebase';
 import { 
@@ -78,6 +81,13 @@ Register = () => {
                   this.storeData("userType",this.state.opcode == "" ?  "user" : "operator" )
                   this.storeData("userName",this.state.name )
                   this.storeData("userEmail",this.state.email )
+                if(this.state.opcode == "")
+                    this.props.navigation.navigate("Home")
+                else
+                    this.props.navigation.navigate("HomeDR")
+                   
+                    
+
                 }).catch((error) => Alert.alert(error.toString(error)));
 
                 firebase.auth().onAuthStateChanged((user)=>{
@@ -90,6 +100,9 @@ Register = () => {
                    
                     })
                 })
+
+               
+                   
             }
             
             
@@ -98,7 +111,7 @@ Register = () => {
               }
         
         // this.store("usertype",this.state.active)
-       // this.props.navigation.navigate('Track')
+        
    }
     render() {
         const {active} = this.state;
@@ -140,7 +153,7 @@ Register = () => {
         <Text h3
             style={{ marginBottom: 5 }}
         >
-            Sign up to Zia Tracker</Text>
+            Sign up to FollowMe</Text>
 
         <Text
             paragraph
