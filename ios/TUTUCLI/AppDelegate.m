@@ -15,7 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"AIzaSyDpcqyzTDe92at5t7tdYU4DOJkAM14wRzw"];
+  [GMSServices provideAPIKey:@"AIzaSyCSRXncujncTlkXkv2O1CJVV4iR876duPE"];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"TUTUCLI"

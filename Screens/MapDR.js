@@ -14,8 +14,11 @@ import config from '../config/firebase';
 import FetchLocation from '../components/FetchLocation';
 import Maps from '../components/UsersMaps';
 import ViewLocation from '../components/ViewLocation';
+
+
 import Head from '../components/header';
-import { 
+
+import {
     View,
     StyleSheet,
     AppState,
@@ -26,38 +29,83 @@ const height = Dimensions.get("window").height
 class MapLocation extends Component {
 
       componentDidMount(){
-            
-            
-        this.willFocusSubscription = this.props.navigation.addListener(
+        Geolocation.getCurrentPosition(position =>{
+          // Alert.alert("hi")
+          console.log("initally only",position);
+        this.setState({
+          initialLocation:{
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }
+        });
+      })
+      this.willFocusSubscription = this.props.navigation.addListener(
             'willFocus',
             () => {
                 this.setState({
                   appState: AppState.currentState,
                   userLocation: null,
                   viewLocation:null,
-                  userPlaces : []
+                  userPlaces : [],
+                  start:false
                 })
-                
-            
+
+
     }
     );
-    
+
 }
     state = {
         appState: AppState.currentState,
+        region:null,
         userLocation: null,
         viewLocation:null,
-        userPlaces : []
+        speed:0,
+        userPlaces : [],
+        initialLocation:{
+          latitude:'',
+          longitude:'',
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+
+        },
+        currentPlace:''
+
       }
 
       getUserLocation= ()=>{
+
+
       //  Alert.alert(this.props.navigation.getParam('Busno'))
+
+
         Geolocation.watchPosition(position =>{
-          console.log(position);
+          fetch('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCSRXncujncTlkXkv2O1CJVV4iR876duPE&address=' + position.coords.latitude + ',' + position.coords.longitude)
+          .then((response) => response.json())
+          .then((responseJson) => {
+                let current = responseJson.results[0].address_components[0].short_name
+
+                current.replace(`"`,``)
+                this.setState({currentPlace:current})
+
+            })
+            let speed = JSON.stringify(position.coords.speed)
+
+            this.setState({speed:speed})
+            let loca = {
+            lat:position.coords.latitude,
+            lng:position.coords.longitude
+          }
+          //  console.log(ret);
         this.setState({
           userLocation:{
-            latitude: position.coords.latitude,
+            // initialLatitude: this.state.initialLocation.latitude,
+            // initialLongitude: this.state.initialLocation.longitude,
+            latitude:position.coords.latitude,
             longitude: position.coords.longitude,
+            speed:position.coords.speed,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }
@@ -67,22 +115,25 @@ class MapLocation extends Component {
           body:JSON.stringify({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
+            speed:position.coords.speed,
+            placename:this.state.currentPlace,
+            datetime:new Date()
           })
         })
-        .then(res => console.log(res))
+        // .then(res => console.log(res))
         .catch(err=> console.log(err));
-    
+
        },
        err=>{
          console.log(err);
-       });
+       },{enableHighAccuracy: true, timeout: 50000, maximumAge: 0, distanceFilter: 1});
       }
-      
-      
 
-      
+
+
+
     render() {
-        
+
         const {navigation} = this.props;
         const toggleDrawer = () => {
             navigation.openDrawer();
@@ -93,17 +144,32 @@ class MapLocation extends Component {
             <Head name="Bus Location" Option={toggleDrawer}/>
         <Block style={styles.map} >
         <Maps  Location={this.state.userLocation}
+              initialLocationLocation = {this.state.initialLocation}
           userPlace={this.state.userPlace}
           />
-           
+
         </Block>
 
         {/* <Button color="green" title="Track" onPress={this.Call}/> */}
-     
-        <Block flex={.2} center middle style={styles.cardbottom}>
-            <FetchLocation onGetLOcation={this.getUserLocation}/>
+
+
+            <Block flex={.4} style={styles.cardbottom} row  >
+              <Block>
+                <Block row center middle space="between" >
+                  <Block>
+                    <Text center h4>Speed: {parseInt(this.state.speed)} KM/H</Text>
+                  </Block>
+                  <Block>
+                    <Text center h4>{this.state.currentPlace}  </Text>
+                  </Block>
+                  {/* {this.state.currentPlace}  */}
+                </Block>
+          <FetchLocation onGetLOcation={this.getUserLocation} />
+            </Block>
+
         </Block>
-       
+
+
       </Block>
         );
     }
@@ -116,12 +182,12 @@ const styles = StyleSheet.create({
     },
     map:{
   flex:1,
-  
+
     },
     mapfetch:{
       flex:1,
       paddingTop:10
-  
+
     },
     cardbottom:{
       backgroundColor:"white",
@@ -131,9 +197,10 @@ const styles = StyleSheet.create({
       bottom:0,
       borderTopLeftRadius:30,
       borderTopRightRadius:30,
+      alignItems:"flex-end",
 
-     
-      
+
+
+
     }
   });
-  

@@ -1,11 +1,13 @@
 import React from "react";
-import { 
+import {
     View,
     Text,
     StyleSheet,
     Alert
 } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCSRXncujncTlkXkv2O1CJVV4iR876duPE';
 
 const UserMaps = (props) => {
  //  console.log(props.Location);
@@ -15,7 +17,7 @@ const UserMaps = (props) => {
         LocationMarker =  <MapView.Marker coordinate={props.Location} /> ;
    }
     return(
-        
+
    <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.map}
@@ -26,11 +28,21 @@ const UserMaps = (props) => {
               longitudeDelta: 0.0421,
             }}
             region={props.Location}
-           
-          >
+
+            >
+               <MapViewDirections
+            origin={props.initialLocation}
+            destination={{
+              latitude: 11.0384,
+              longitude: 76.2627,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            apikey={GOOGLE_MAPS_APIKEY}
+    />
              {LocationMarker}
               </MapView>
-          
+
     );
 }
 export default UserMaps;

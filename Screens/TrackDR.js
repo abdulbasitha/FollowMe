@@ -3,7 +3,7 @@
 /* github    : abdulbasitha */
 /* More Info : https://techzia.in */
 import React, { Component } from "react";
-import { 
+import {
     View,
     Image,
     StyleSheet,
@@ -25,23 +25,23 @@ import * as theme from '../contants/theme';
 class Track extends Component {
 
 //     componentDidMount(){
-            
-            
+
+
 //         this.willFocusSubscription = this.props.navigation.addListener(
 //             'willFocus',
 //             () => {
 //                 this.setState({
 //                     busno:null
 //                 })
-                
-            
+
+
 //     }
 //     );
-    
+
 // }
     constructor(){
         super()
-       
+
         this.getData("userType")
     }
     state = {
@@ -55,14 +55,14 @@ Track = ()=>{
         Busno:this.state.busno
       })
    }
-        
+
 }
     async getData(key) {
         try {
           let userData = await AsyncStorage.getItem(key);
           let data = JSON.parse(userData);
           console.log(data)
-          
+
         } catch (error) {
           console.log("Something went wrong", error);
         }
@@ -76,7 +76,7 @@ Track = ()=>{
             <Block center middle style={{backgroundColor:'white'}}>
               <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
                 <Head  name ="FolowMe Driver" Option={toggleDrawer}/>
-             
+
                  <Block middle>
                     <Image source={require('../assets/Src/img/logo.png')}
                     style={{height:70,width:70}}
@@ -84,29 +84,29 @@ Track = ()=>{
                 </Block>
                 <Block flex={2.8} center>
                 <Text h3
-                    // size={28} 
-                    // // color="#2e384d" 
-                    // spacing={0} 
-                    // height={32} 
+                    // size={28}
+                    // // color="#2e384d"
+                    // spacing={0}
+                    // height={32}
                     // weight={'normal'}
                      style={{marginBottom:5}}
                     >
                       FollowMe Driver</Text>
-                    
-                    <Text 
+
+                    <Text
                     paragraph
                     color="black3"
-                    // size={15} 
-                    // color="#8798ad" 
-                    // spacing={0} 
-                    // height={22} 
-                    // weight={'normal'} 
-                    >Navigate Your Bus With Zia Driver.</Text>
+                    // size={15}
+                    // color="#8798ad"
+                    // spacing={0}
+                    // height={22}
+                    // weight={'normal'}
+                    >Navigate Your Bus With FollowMe.</Text>
                     <Block center style={{marginTop:40}}>
                     <Input value={this.state.busno} onChangeText={(no)=>this.setState({busno:no})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
-                    <Button   style={{marginBottom:12}} onPress={this.Track}> 
+                    <Button   style={{marginBottom:12}} onPress={this.Track}>
                     <Text button >Start</Text>
-                    
+
                 </Button>
                 <Text paragraph color="gray" onPress={() => Linking.openURL('mailto:support@techzia.in?subject=Zia Tracker&body=Your Message') }
       title="support@example.com">
@@ -114,12 +114,12 @@ Track = ()=>{
                 </Text>
                     </Block>
                 </Block>
-            </Block>   
+            </Block>
         );
     }
 }
 export default Track;
 
 const styles = StyleSheet.create({
-   
+
 });

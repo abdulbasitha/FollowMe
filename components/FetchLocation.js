@@ -1,19 +1,24 @@
 import React from "react";
-import { 
+import {
     View,
-    Text,
     StyleSheet,
-    Button
-} from "react-native";
 
+} from "react-native";
+import Button from './Button';
+import Text from './Text';
+import Block from "./Block";
 const FetchLocation = (props) => {
     return(
-     <Button title="Start" onPress={props.onGetLOcation}/>
+
+     <Button style={{width:"100%"}}  onPress={props.onGetLOcation}>
+          <Text button> Start</Text>
+         </Button>
+
     );
 }
 export default FetchLocation;
 
 const styles = StyleSheet.create({
-    
-    
+
+
 });

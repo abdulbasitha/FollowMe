@@ -28,9 +28,10 @@ class Track extends Component {
         this.getData("userType")
     }
     state = {
-        busno:null
+        busno:321
     }
     Track = ()=>{
+        Alert.alert('Bus Found','Bus No 10 is near your location')
         if(this.state.busno == null){
              Alert.alert("Enter a valid Bus no")
         }else{
@@ -58,7 +59,7 @@ class Track extends Component {
         return (
             <Block center middle style={{backgroundColor:'white'}}>
               <StatusBar barStyle = "light-content"  backgroundColor = {theme.colors.status_bar} />
-                <Head  name ="Track" Option={toggleDrawer}/>
+                <Head  name ="Search" Option={toggleDrawer}/>
 
                  <Block middle>
                     <Image source={require('../assets/Src/img/logo.png')}
@@ -86,14 +87,15 @@ class Track extends Component {
                     // weight={'normal'}
                     >Track Your Bus With FollowMe.</Text>
                     <Block center style={{marginTop:40}}>
-                    <Input value={this.state.busno} onChangeText={(no)=>this.setState({busno:no})} label={"Bus Number"}  style={{  marginBottom:15}} full number/>
+                    <Input value={"perinthalmanna"}  label={"Current Location"}  style={{  marginBottom:15}} full />
+                    <Input value={"mea engineering college"}  label={"Destination"}  style={{  marginBottom:15}} full />
                     <Button   style={{marginBottom:12}} onPress={this.Track}>
-                    <Text button >Track</Text>
+                    <Text button >Search</Text>
 
                 </Button>
-                <Text paragraph color="gray" onPress={() => navigation.navigate('Search') }
+                <Text paragraph color="gray" onPress={() => Linking.openURL('mailto:support@techzia.in?subject=Zia Tracker&body=Your Message') }
       title="support@example.com">
-                Search by location
+                Report a Problem
                 </Text>
                     </Block>
                 </Block>

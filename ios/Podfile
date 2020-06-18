@@ -53,6 +53,8 @@ target 'TUTUCLI' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'TUTUCLITests' do
     inherit! :search_paths
     # Pods for testing
